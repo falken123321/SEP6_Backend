@@ -18,6 +18,14 @@ public class Movies {
     @Column(name = "year")
     private Long year;
 
+    public Movies(Integer id, String title, Long year) {
+        this.id = id;
+        this.title = title;
+        this.year = year;
+    }
+
+    public Movies() {}
+
     public Integer getId() {
         return id;
     }

@@ -18,6 +18,14 @@ public class Ratings {
     @Column(name = "votes")
     private Integer votes;
 
+    public Ratings(Integer movieId, Float rating, Integer votes) {
+        this.movieId = movieId;
+        this.rating = rating;
+        this.votes = votes;
+    }
+    public Ratings() {
+    }
+
     public Integer getMovieId() {
         return movieId;
     }

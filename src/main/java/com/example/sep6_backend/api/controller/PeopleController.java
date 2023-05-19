@@ -10,19 +10,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class UserController {
+public class PeopleController {
 
-    private UserService userService;
+    private PeopleService peopleService;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public PeopleController (PeopleService peopleService) {
+        this.peopleService = peopleService;
     }
-
-/*
-    @GetMapping("/getUserWithId")
+    @GetMapping("/getPeopleWithId")
     public People getUser(@RequestParam Integer id) {
         return peopleService.retrievePeopleById(id);
     }
-*/
 }

@@ -11,9 +11,17 @@ public class Directors {
     @Basic
     @Column(name = "movie_id")
     private Integer movieId;
+
     @Basic
     @Column(name = "person_id")
     private Integer personId;
+
+    public Directors() {
+    }
+    public Directors(Integer movieId, Integer personId) {
+        this.movieId = movieId;
+        this.personId = personId;
+    }
 
     public Integer getMovieId() {
         return movieId;

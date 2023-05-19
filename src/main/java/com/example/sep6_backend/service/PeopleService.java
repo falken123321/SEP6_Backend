@@ -14,7 +14,6 @@ public class PeopleService {
         this.peopleRepository = peopleRepository;
     }
 
-
     public People retrievePeopleById(int id) {
         return peopleRepository.getPeopleById(id);
     }
