@@ -34,3 +34,4 @@ build/
 /src/main/java/com/example/sep6_backend/persistence/HibernateConfig.java
 /src/main/resources/hibernate.cfg.xml
 /src/main/resources/META-INF/persistence.xml
+src/main/resources/application.properties

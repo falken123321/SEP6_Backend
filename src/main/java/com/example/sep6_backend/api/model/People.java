@@ -1,11 +1,87 @@
 package com.example.sep6_backend.api.model;
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "people", schema = "public", catalog = "postgres")
+public class People {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+
+    @Basic
+    @Column(name = "name")
+    private String name;
+
+    @Basic
+    @Column(name = "birth")
+    private Long birth;
+
+    public People() {}
+
+    public People(int id, String name, Long birth) {
+        this.id = id;
+        this.name = name;
+        this.birth = birth;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getBirth() {
+        return birth;
+    }
+
+    public void setBirth(Long birth) {
+        this.birth = birth;
+    }
+
+
+    public boolean equals(People other) {
+        if(this.id != other.id || this.name != other.name || this.birth != other.birth) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        try {
+            return "People{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", birth=" + birth +
+                    '}';
+        } catch (Exception e) {
+            e.printStackTrace();
+            return super.toString();
+        }
+    }
+}
+
+
+
+/*package com.example.sep6_backend.api.model;
 
 import jakarta.persistence.*;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "people")
+@Table(name = "people", schema = "public", catalog = "postgres")
 public class People {
 
     @Basic
@@ -95,4 +171,4 @@ public class People {
         result = 31 * result + (birth != null ? birth.hashCode() : 0);
         return result;
     }
-}
+}*/
