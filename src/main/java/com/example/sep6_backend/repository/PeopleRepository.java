@@ -27,7 +27,7 @@ public class PeopleRepository {
             int personId = (int) result[0];
             String name = (String) result[1];
             java.math.BigInteger birth = (java.math.BigInteger) result[2];
-            
+
             return new People(personId, name, birth.longValue());
         }
         return null;
