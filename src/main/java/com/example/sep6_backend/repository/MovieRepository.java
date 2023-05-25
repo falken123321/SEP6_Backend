@@ -1,11 +1,9 @@
 package com.example.sep6_backend.repository;
 
-import com.example.sep6_backend.api.model.Directors;
-import com.example.sep6_backend.api.model.Movies;
-import com.example.sep6_backend.api.model.People;
-import org.springframework.stereotype.Repository;
+import com.example.sep6_backend.api.model.Movie;
+import org.springframework.stereotype.*;
 import javax.persistence.*;
-import javax.transaction.Transactional;
+import javax.transaction.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,16 +14,41 @@ public class MovieRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
-    public Movies getMovieById(int id) {
-        Query query = entityManager.createNativeQuery("SELECT m.* FROM movies m WHERE m.id=:id");
+
+    public List<Movie> getMoviesByTitle(String title) {
+        Query query = entityManager.createNativeQuery("SELECT * FROM movie WHERE title LIKE :title");
+        query.setParameter("title", "%" + title + "%");
+        List<Object[]> results = query.getResultList();
+
+        List<Movie> movies = new ArrayList<>();
+        for (Object[] result : results) {
+            Movie movie = new Movie(Long.parseLong(result[1].toString()), (String) result[0]);
+            movies.add(movie);
+        }
+        return movies;
+    }
+
+    public Movie getMovieById(int id) {
+        Query query = entityManager.createNativeQuery("SELECT u.* FROM movie u where u.id=:id");
         query.setParameter("id", id);
         List<Object[]> results = query.getResultList();
 
         for (Object[] result : results) {
-            int movieId = (int) result[0];
-            String title = (String) result[1];
-            Long year = ((java.math.BigInteger) result[2]).longValue();
-            return new Movies(movieId,title,year);
-        } return null;
+            Movie m = new Movie(Long.parseLong(result[1].toString()),(String) result[0]);
+            return m;
+        }
+        return null;
     }
+
+    public Movie saveMovie(Movie movie) {
+        try {
+            entityManager.persist(movie);
+            System.out.println("Movie saved successfully!");
+            return movie;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+
 }

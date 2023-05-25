@@ -1,6 +1,6 @@
 package com.example.sep6_backend.service;
 
-import com.example.sep6_backend.api.model.Movies;
+import com.example.sep6_backend.api.model.Movie;
 import com.example.sep6_backend.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,14 +9,22 @@ import java.util.List;
 
 @Service
 public class MovieService {
-    private MovieRepository movieRepository;
 
     @Autowired
-    public void setPeopleRepository(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
+    private MovieRepository movieRepository;
+
+    public Movie saveMovie(Long id, String title) {
+        Movie m = new Movie(id, title);
+
+        return movieRepository.saveMovie(m);
     }
 
-    public Movies retrieveMovieById(int movieId) {
-        return movieRepository.getMovieById(movieId);
+    public Movie getMovie(int id) {
+        return movieRepository.getMovieById(id);
     }
+
+    public List<Movie> getMoviesFromSearch(String input) {
+        return movieRepository.getMoviesByTitle(input);
+    }
+
 }

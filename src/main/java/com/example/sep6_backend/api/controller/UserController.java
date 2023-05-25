@@ -1,14 +1,11 @@
 package com.example.sep6_backend.api.controller;
 
-import com.example.sep6_backend.api.model.People;
 import com.example.sep6_backend.api.model.User;
-import com.example.sep6_backend.service.PeopleService;
 import com.example.sep6_backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class UserController {
 
@@ -19,10 +16,16 @@ public class UserController {
         this.userService = userService;
     }
 
-/*
-    @GetMapping("/getUserWithId")
-    public People getUser(@RequestParam Integer id) {
-        return peopleService.retrievePeopleById(id);
+    @PostMapping("/createUser")
+    public User createUser(@RequestParam String username, @RequestParam String password, @RequestParam String email, @RequestParam String firstname, @RequestParam String lastName) {
+        return userService.saveUser(username, password, email, firstname, lastName);
     }
-*/
+
+    @GetMapping("/login")
+    public User createUser(@RequestParam String username, @RequestParam String password) {
+        return userService.login(username, password);
+    }
+
+
+
 }
