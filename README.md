@@ -1,6 +1,6 @@
 # SEP6_Backend
 
-## -----BASE API-----
+## BASE API's
 http://localhost:8081/createUser			            -Post\
 http://localhost:8081/login		        	          -Get\
 http://localhost:8081/createMovie		              -Post\
