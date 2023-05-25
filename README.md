@@ -9,4 +9,4 @@ http://localhost:8081/getMoviesFromSearch	        -Get\
 http://localhost:8081/createBookmarkAndSaveBook	  -Post\
 http://localhost:8081/getBookmarksByUserId	      -Get\
 http://localhost:8081/createReview		            -Post\
-http://localhost:8081/getReviewByMovieId		      -Get\
+http://localhost:8081/getReviewByMovieId		      -Get
