@@ -16,13 +16,13 @@ public class MovieRepository {
     private EntityManager entityManager;
 
     public List<Movie> getMoviesByTitle(String title) {
-        Query query = entityManager.createNativeQuery("SELECT * FROM movie WHERE title LIKE :title");
-        query.setParameter("title", "%" + title + "%");
+        Query query = entityManager.createNativeQuery("SELECT * FROM movie WHERE LOWER(title) LIKE LOWER(:title)");
+        query.setParameter("title", "%" + title.toLowerCase() + "%");
         List<Object[]> results = query.getResultList();
 
         List<Movie> movies = new ArrayList<>();
         for (Object[] result : results) {
-            Movie movie = new Movie(Long.parseLong(result[1].toString()), (String) result[0]);
+            Movie movie = new Movie(Long.parseLong(result[1].toString()), (String) result[0],(String) result[2]);
             movies.add(movie);
         }
         return movies;
@@ -34,7 +34,7 @@ public class MovieRepository {
         List<Object[]> results = query.getResultList();
 
         for (Object[] result : results) {
-            Movie m = new Movie(Long.parseLong(result[1].toString()),(String) result[0]);
+            Movie m = new Movie(Long.parseLong(result[1].toString()),(String) result[0],(String) result[2]);
             return m;
         }
         return null;

@@ -23,18 +23,28 @@ public class BookmarkController {
         this.bookmarkService = bookmarkService;
     }
     @PostMapping("/createBookmarkAndSaveBook")
-    public Bookmark createBookmark(@RequestParam Integer movie_id, @RequestParam Integer user_id, @RequestParam String title) {
+    public Bookmark createBookmark(@RequestParam Integer movie_id, @RequestParam Integer user_id, @RequestParam String title,@RequestParam String imageString) {
         try {
-            movieService.saveMovie(Long.parseLong(movie_id.toString()),title);
+            movieService.saveMovie(Long.parseLong(movie_id.toString()),title,imageString);
         } finally {
             return bookmarkService.saveBookmark(movie_id,user_id);
         }
     }
 
     @GetMapping("/getBookmarksByUserId")
-    public List<Movie> createBookmark(@RequestParam Integer user_id) {
+    public List<Movie> getBookmarksByUserId(@RequestParam Integer user_id) {
         return bookmarkService.getBookmarksByUser(user_id);
 
+    }
+
+    @PostMapping("/deleteBookmarkByUserOnMovie")
+    public String deleteBookmarkByUserOnMovie(@RequestParam Integer user_id, @RequestParam Integer movie_id) {
+        try {
+            bookmarkService.deleteBookmark(user_id, movie_id);
+            return "success";
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 }

@@ -18,12 +18,20 @@ public class UserController {
 
     @PostMapping("/createUser")
     public User createUser(@RequestParam String username, @RequestParam String password, @RequestParam String email, @RequestParam String firstname, @RequestParam String lastName) {
+        if (userService.userExistsWithUsername(username)) {
+            return null;
+        }
         return userService.saveUser(username, password, email, firstname, lastName);
     }
 
     @GetMapping("/login")
     public User createUser(@RequestParam String username, @RequestParam String password) {
         return userService.login(username, password);
+    }
+
+    @GetMapping("/getUserWithId")
+    public User getUserWithId(@RequestParam int id) {
+        return userService.getUserWithId(id);
     }
 
 

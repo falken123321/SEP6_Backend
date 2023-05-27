@@ -18,31 +18,19 @@ public class MovieController {
         this.movieService = movieService;
     }
     @PostMapping("/createMovie")
-    public Movie createUser(@RequestParam Integer id, @RequestParam String title) {
-        return movieService.saveMovie(Long.parseLong(id.toString()),title);
+    public Movie createMovie(@RequestParam Integer id, @RequestParam String title, @RequestParam String imageString) {
+        return movieService.saveMovie(Long.parseLong(id.toString()),title,imageString);
     }
 
     @GetMapping("/getMovie")
-    public Movie createUser(@RequestParam Integer id) {
+    public Movie getMovie(@RequestParam Integer id) {
         return movieService.getMovie(id);
     }
 
     @GetMapping("/getMoviesFromSearch")
-    public List<Movie> createUser(@RequestParam String searchString) {
+    public List<Movie> getMoviesFromSearch(@RequestParam String searchString) {
         return movieService.getMoviesFromSearch(searchString);
     }
-
-/*
-    @PostMapping("/createUser")
-    public User createUser(@RequestParam String username, @RequestParam String password, @RequestParam String email, @RequestParam String firstname, @RequestParam String lastName) {
-        return userService.saveUser(username, password, email, firstname, lastName);
-    }
-
-    @GetMapping("/login")
-    public User createUser(@RequestParam String username, @RequestParam String password) {
-        return userService.login(username, password);
-    }
-*/
 
 
 }

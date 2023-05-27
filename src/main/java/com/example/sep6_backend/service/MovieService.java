@@ -13,8 +13,8 @@ public class MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
-    public Movie saveMovie(Long id, String title) {
-        Movie m = new Movie(id, title);
+    public Movie saveMovie(Long id, String title, String imageString) {
+        Movie m = new Movie(id, title, imageString);
 
         return movieRepository.saveMovie(m);
     }

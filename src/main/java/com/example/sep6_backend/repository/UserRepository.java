@@ -15,15 +15,22 @@ public class UserRepository {
     @PersistenceContext
     private EntityManager entityManager;
     public User getUserById(int id) {
-        Query query = entityManager.createNativeQuery("SELECT u.* FROM User u where u.id=:id"); //SELECT p.* FROM User p WHERE p.id=:id
+        Query query = entityManager.createNativeQuery("SELECT u.* FROM \"user\" u where u.\"id\"=:id");
         query.setParameter("id", id);
         List<Object[]> results = query.getResultList();
 
         List<User> users = new ArrayList<>();
         for (Object[] result : results) {
-            //int person_id = (int) result[1];
-            //MAKE A USER;
-            users.add(null);
+            String _username = (String) result[0];
+            String _password = (String) result[1];
+            String email = (String) result[2];
+            String firstname = (String) result[3];
+            String lastName = (String) result[4];
+            boolean isAdmin = (boolean) result[5];
+            boolean banned = (boolean) result[6];
+            User retUser = new User(_username,_password,email,firstname,lastName,isAdmin,banned);
+            retUser.id = Long.valueOf(id);
+            return retUser;
         }
         return users.get(0);
     }
@@ -63,5 +70,10 @@ public class UserRepository {
         return null;
     }
 
-
+    public boolean userExists(String username) {
+        Query query = entityManager.createNativeQuery("SELECT COUNT(*) FROM \"user\" WHERE LOWER(\"username\") = LOWER(:username)");
+        query.setParameter("username", username);
+        int count = ((Number) query.getSingleResult()).intValue();
+        return count > 0;
+    }
 }

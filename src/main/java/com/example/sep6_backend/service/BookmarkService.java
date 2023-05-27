@@ -21,21 +21,34 @@ public class BookmarkService {
     private MovieRepository movieRepository;
 
     public Bookmark saveBookmark(int movie_id,int user_id) {
-        Bookmark bm = new Bookmark(movie_id, user_id);
-        return bookmarkRepository.saveBookmark(bm);
+        if (bookmarkRepository.existsBookmarkByUserIdAndMovieId(user_id,movie_id)) {
+            return bookmarkRepository.getBookmarkByUserIdAndMovieId(user_id,movie_id);
+        } else {
+            Bookmark bm = new Bookmark(movie_id, user_id);
+            return bookmarkRepository.saveBookmark(bm);
+        }
     }
 
     public List<Movie> getBookmarksByUser(int user_id) {
         List<Bookmark> bookmarks = bookmarkRepository.getBookmarksByUserId(user_id);
+        if (bookmarks.isEmpty()) {
+            return null;
+        }
 
         List<Movie> movies = new ArrayList<>();
         for (Bookmark bookmark : bookmarks) {
-            System.out.println(bookmark.getMovie_id());
             Movie movie = movieRepository.getMovieById(bookmark.getMovie_id());
-            movies.add(movie);
+            if(movie != null) {
+                movies.add(movie);
+            }
         }
         return movies;
     }
+
+    public void deleteBookmark(int user_id, int movie_id) {
+        bookmarkRepository.deleteBookmarkByUserIdAndMovieId(user_id,movie_id);
+    }
+
 
 
 }

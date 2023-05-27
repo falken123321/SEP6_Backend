@@ -41,5 +41,33 @@ public class BookmarkRepository {
         }
     }
 
+    public void deleteBookmarkByUserIdAndMovieId(int user_id, int movie_id) {
+        Query query = entityManager.createNativeQuery("DELETE FROM bookmark WHERE user_id = :userId AND movie_id = :movieId");
+        query.setParameter("userId", user_id);
+        query.setParameter("movieId", movie_id);
+        query.executeUpdate();
+    }
+
+    public boolean existsBookmarkByUserIdAndMovieId(int user_id, int movie_id) {
+        Query query = entityManager.createNativeQuery("SELECT COUNT(*) FROM bookmark WHERE user_id = :userId AND movie_id = :movieId");
+        query.setParameter("userId", user_id);
+        query.setParameter("movieId", movie_id);
+        int count = ((Number) query.getSingleResult()).intValue();
+        return count > 0;
+    }
+
+    public Bookmark getBookmarkByUserIdAndMovieId(int user_id, int movie_id) {
+        Query query = entityManager.createNativeQuery("SELECT b.* FROM bookmark b WHERE b.user_id = :userId AND b.movie_id = :movieId");
+        query.setParameter("userId", user_id);
+        query.setParameter("movieId", movie_id);
+        List<Object[]> results = query.getResultList();
+
+        for (Object[] result : results) {
+            Integer bookmarkId = (int) result[0];
+            Bookmark bookmark = new Bookmark(Long.valueOf(bookmarkId.toString()),movie_id,user_id);
+            return bookmark;
+        }
+        return null;
+    }
 
 }

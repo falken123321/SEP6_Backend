@@ -17,9 +17,16 @@ public class Bookmark {
     @Column(name = "user_id")
     public Integer user_id;
 
+
     public Bookmark(Integer movie_id, Integer user_id) {
         this.movie_id = movie_id;
         this.user_id = user_id;
+    }
+
+    public Bookmark(Long id, Integer movie_id, Integer user_id) {
+        this(movie_id,user_id);
+        this.id = id;
+
     }
 
     public Integer getMovie_id() {
