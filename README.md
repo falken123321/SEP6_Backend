@@ -13,4 +13,9 @@ http://falkmikkelsen.dk:8081/getReviewByMovieId			-Get\
 http://falkmikkelsen.dk:8081/getReviewByUserId			-Get\
 http://falkmikkelsen.dk:8081/deleteBookmarkByUserOnMovie	-Get\
 http://falkmikkelsen.dk:8081/getTopRatedMovies			-Get\
-http://falkmikkelsen.dk:8081/getUserWithId			-Get
+http://falkmikkelsen.dk:8081/getUserWithId			-Get\
+
+## Github navne:
+falken123321: Kasper Falk Mikkelsen (304712) \
+neaxic: Andreas Østergaard (304546) \
+buildermark: Mark Hjuler Pedersen (304624)
