@@ -55,7 +55,14 @@ public class ReviewService {
     }
 
     public List<Review> getReviewsByUserId(int user_id) {
-        return reviewRepository.getReviewsByUserId(user_id);
+        List<Review> reviews = reviewRepository.getReviewsByUserId(user_id);
+
+        for (Review review : reviews) {
+            Movie movie = movieRepository.getMovieById(review.getMovie_id());
+            review.setImage(movie.getImageString());
+            review.setTitle(movie.title);
+        }
+        return reviews;
     }
 
     public List<Movie> getTopRatedMovies() {
